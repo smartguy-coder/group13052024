@@ -2,4 +2,5 @@
 
 - python -m venv venv
 - win -- .\venv\Scripts\activate
-- mac -- source ./venv/Scripts/activate
+- mac -- source ./venv/bin/activate
+- mac -- which python3

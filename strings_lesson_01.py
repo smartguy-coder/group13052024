@@ -19,6 +19,10 @@ emoji = """
 \U0001F42E
 """
 
+# do not perform like this
+# імя = "моє імя"
+# print(імя)
+
 print(chr(1111))
 print(ord('🤽'))
 
