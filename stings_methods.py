@@ -25,3 +25,7 @@ print('  Hhhh lkjkuhh'.lower().count('hh'))
 
 head = '*8' * 40
 print(head)
+
+random_string = 'Одеса - місто біля моря. Я люблю Одесу та одеські манси'
+inclusions_odesa_part_in_random_string = random_string.lower().count('одес')
+print(f'{inclusions_odesa_part_in_random_string=}')
