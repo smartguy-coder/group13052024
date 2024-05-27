@@ -7,3 +7,4 @@
 
 auto code formatting
 - Ctrl - Alt - l
+- Ctrl - Shift - f   - search everywhere
