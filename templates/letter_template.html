@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header, .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .footer {
+            font-size: 0.9em;
+            color: #777;
+        }
+        .signature {
+            margin-top: 40px;
+            text-align: right;
+        }
+        .signature img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <p>Dear {{ recipient_name }},</p>
+            <p>{{ body_content }}</p>
+            <p>Sincerely,</p>
+
+            {% if age > 10 %}
+                <p>age = {{ age }}</p>
+            {% else %}
+            <p>too young</p>
+            {% endif %}
+
+
+            {{ cars }}
+            {% for car in cars %}
+            <h3>{{ car }}</h3>
+            {% endfor %}
+
+
+
+            <div class="signature">
+                {% if sender_signature %}
+                    <img src="{{ sender_signature }}" alt="Signature">
+                {% endif %}
+                <p>{{ sender_name }}</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>{{ footer_text }}</p>
+        </div>
+    </div>
+</body>
+</html>
+

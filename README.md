@@ -8,3 +8,7 @@
 auto code formatting
 - Ctrl - Alt - l
 - Ctrl - Shift - f   - search everywhere
+
+pip install python-dotenv
+pip3 install jinja2
+
