@@ -19,7 +19,7 @@ def main():
         }
         body = email_sender.create_welcome_letter(params)
         email_sender.send_email(
-            recipients=list_of_recipients, mail_subject='Head', mail_body=body
+            recipients=list_of_recipients, mail_subject='Head', mail_body=body, attachment='data.json'
         )
 
 
