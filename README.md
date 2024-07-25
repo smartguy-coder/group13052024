@@ -16,3 +16,11 @@ pip or pip3
 
 pip3 freeze > requirements.txt 
 pip3 install -r requirements.txt
+
+
+╰─ xgettext -i *.py -o transl.pot -d this_project
+╰─ mkdir -p locale/uk/LC_MESSAGES
+╰─ msginit -i transl.pot -o locale/ru/LC_MESSAGES/this_project.po -l ru
+╰─ msgfmt  locale/ru/LC_MESSAGES/this_project.po -o locale/ru/LC_MESSAGES/this_project.mo
+╰─ msgmerge --update locale/ru/LC_MESSAGES/this_project.po transl.pot
+
