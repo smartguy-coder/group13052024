@@ -61,19 +61,70 @@ products = [
 # response = prod_coll.aggregate(query)
 # pprint(list(response))
 
-# match stage
+# $match stage
+# query = [
+#     {'$match': {'contain_gluten': False}}
+# ]
+# query = [
+#     {'$match': {
+#         # '$and': [
+#         '$or': [
+#             {'contain_gluten': True},
+#             {'price': {'$gte': 40}},
+#         ]
+#         }
+#     }
+# ]
+# response = prod_coll.aggregate(query)
+# pprint(list(response))
+
+
+# stage $group
+# query = [
+#     {
+#         '$group': {'_id': '$contain_gluten'}
+#     }
+# ]
+# response = prod_coll.aggregate(query)
+# pprint(list(response))
+#
+# query = [
+#     {
+#         '$group': {'_id': {'gluten': '$contain_gluten', 'price2': '$price'}}
+#     }
+# ]
+# response = prod_coll.aggregate(query)
+# pprint(list(response))
+
+# $sum stage
+
+
+# query = [
+#     {
+#         '$group': {'_id': '$contain_gluten', 'count': {'$sum': '$remains'}}
+#     }
+# ]
+# response = prod_coll.aggregate(query)
+# pprint(list(response))
+
+
+# final $project stage
+
+# query = [
+#     {'$project': {'_id': 0, 'contain_gluten': 1, 'title': 1, 'item_description': {'$concat': ['$title', ' - ', '$comment']}}   }
+# ]
+# response = prod_coll.aggregate(query)
+# pprint(list(response))
+
+
+# FINAL
+
 query = [
-    {'$match': {'contain_gluten': False}}
-]
-query = [
-    {'$match': {
-        # '$and': [
-        '$or': [
-            {'contain_gluten': True},
-            {'price': {'$gte': 40}},
-        ]
-        }
-    }
+    {'$match': {'price': {'$gt': 24}}},
+    {'$project': {'_id': 0, 'contain_gluten': 1, 'title': 1, 'this_product_cost_with_vat': {'$multiply': ['$price', '$remains', 1.2]}}},
+    {'$match': {'this_product_cost_with_vat': {'$gt': 2000}}},
+    {'$group': {'_id': '$contain_gluten', 'total': {'$sum': '$this_product_cost_with_vat'}}},
+    {'$match': {'total': {'$gt': 33000}}},
 ]
 response = prod_coll.aggregate(query)
 pprint(list(response))
