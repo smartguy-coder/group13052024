@@ -16,3 +16,11 @@ pip or pip3
 
 pip3 freeze > requirements.txt 
 pip3 install -r requirements.txt
+
+
+pytest .
+pytest -v  .
+pytest -v -s  . 
+pytest -v  test_utils.py::TestAddTwoNumbers::test_add_two_combined 
+pytest -v  test_utils.py::TestAddTwoNumbers
+
