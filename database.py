@@ -99,15 +99,122 @@ with sqlite3.connect(DB_PATH) as connection:
     # """
     # cursor.execute(query, values)
 
-
     # READ
+    # query = """
+    #     SELECT title, price, 2 + 2 as co
+    #     FROM products
+    # """
+    # result = cursor.execute(query)
+    # pprint(result.fetchall(), width=40)
+
+    # query = """
+    #     SELECT title, price
+    #     FROM products
+    #     WHERE id >= 2
+    # """
+    # result = cursor.execute(query)
+    # pprint(result.fetchall(), width=40)
+
+    # query = """
+    #     SELECT title, price
+    #     FROM products
+    #     WHERE id < 5 AND price > 1000
+    # """
+    # result = cursor.execute(query)
+    # pprint(result.fetchall(), width=40)
+
+    # query = """
+    #     SELECT id, title, price
+    #     FROM products
+    #     WHERE id < 5 OR (price > 1000 AND title LIKE 'Samsung___%')
+    # """
+    # result = cursor.execute(query)
+    # pprint(result.fetchall(), width=40)
+
+    # query = """
+    #     SELECT products.id, products.title, products.price, category.name
+    #     FROM products
+    #     LEFT JOIN category
+    #     ON products.category_id = category.id
+    #
+    #
+    #     WHERE (products.id BETWEEN 2 AND 6) OR (category.id = 1)
+    #     ORDER BY products.id DESC
+    #     LIMIT 3
+    #     OFFSET 3
+    # """
+    # result = cursor.execute(query)
+    # pprint(result.fetchall(), width=80)
+
+    # query = """
+    #     SELECT products.id, products.title, products.price, category.name, category.id
+    #     FROM products
+    #     INNER JOIN category
+    #     ON products.category_id = category.id
+    #
+    # """
+    # result = cursor.execute(query)
+    # pprint(result.fetchall(), width=80)
+
+    # UPDATE
+    # Update table data
+    # query = """
+    #     UPDATE products
+    #     SET
+    #         title = 'NOKIA'
+    #     WHERE id = 5
+    # """
+    # cursor.execute(query)
+
     query = """
-        SELECT title, price, 2 + 2 as co
-        FROM products
+        UPDATE products
+        SET
+            title = LOWER(:Name || '_' || 'China'),
+            price = :Price
+        WHERE id = :Id
     """
-    result = cursor.execute(query)
-    pprint(result.fetchall(), width=40)
+    cursor.execute(query, {'Name': 'POKO', 'Price': 10000, 'Id': 5})
 
+    # RENAME TABLE
+    # query = """
+    #     ALTER TABLE user
+    #     RENAME TO customers
+    # """
+    # cursor.execute(query)
+    # RENAME COLUMN
+    # query = """
+    #     ALTER TABLE customers
+    #     RENAME COLUMN name TO user_name
+    # """
+    # cursor.execute(query)
 
+    # DELETE
+    # query = """
+    #     DELETE FROM products
+    #     WHERE id = 10
+    # """
+    # result = cursor.execute(query)
+    # print(result.fetchall())
 
+    # DUMP
+    # CREATE DUMP
+    # with open("dump.sql", 'w') as dump:
+    #     for sql in connection.iterdump():
+    #         dump.write(sql)
 
+    # with open("dump.sql", 'r') as dump:
+    #     sql = dump.read()
+    #     cursor.executescript(sql)
+
+    # TRIGGERS
+    # trigger = """
+    #     CREATE TRIGGER IF NOT EXISTS discount_in_title
+    #     AFTER UPDATE ON products
+    #     WHEN old.price > new.price
+    #     BEGIN
+    #         UPDATE products
+    #         SET title = title || UPPER('- with discount >> ') || new.price
+    #         WHERE id = new.id;
+    #     END;
+    # """
+    # cursor.execute(trigger)
